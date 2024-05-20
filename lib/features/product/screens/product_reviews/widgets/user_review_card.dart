@@ -72,9 +72,7 @@ class UserReviewCard extends StatelessWidget {
         trimExpandedText: ' show less',
         trimCollapsedText: ' shoe more',
         moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Gcolors.primary),
-        lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Gcolors.primary),
-        ),
-
+        lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Gcolors.primary)),
             ],
           ),),
         ),

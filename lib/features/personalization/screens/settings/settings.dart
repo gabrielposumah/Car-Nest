@@ -6,6 +6,7 @@ import 'package:product_share_suzuki/common/widgets/costum_Shapes/container/prim
 import 'package:product_share_suzuki/common/widgets/list_tile/setting_menu_tiles.dart';
 import 'package:product_share_suzuki/common/widgets/list_tile/user_profile_tile.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
+import 'package:product_share_suzuki/features/personalization/screens/address/address.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/profile.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
@@ -53,7 +54,7 @@ class SettingsScreens extends StatelessWidget {
                       icon: Iconsax.safe_home,
                       title: 'My Addresses',
                       subtitle: 'Set Shopping delivery address',
-                      onTap: () {}),
+                      onTap: () => Get.to(() => const UserAddressScreen())),
                   GSettingMenuTile(
                       icon: Iconsax.notification,
                       title: 'Notification',
