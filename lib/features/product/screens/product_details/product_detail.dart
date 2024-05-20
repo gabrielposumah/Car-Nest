@@ -46,7 +46,7 @@ class ProductDetail extends StatelessWidget {
                   SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('Checkout'))),
+                          onPressed: () {}, child: const Text('Checkout'))),
                   const SizedBox(height: Gsize.spaceBtwItems),
 
                   // Description

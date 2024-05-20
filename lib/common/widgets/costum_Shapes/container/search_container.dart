@@ -31,7 +31,7 @@ class GSearchContainer extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Container(
-          width: GDeviceUtils.getScreenWidht(),
+          width: GDeviceUtils.getScreenWidht(context),
           padding: const EdgeInsets.all(Gsize.md),
           decoration: BoxDecoration(
               color: showBackground

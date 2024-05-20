@@ -37,8 +37,8 @@ class GDeviceUtils {
     return MediaQuery.of(Get.context!).size.height;
   }
 
-  static double getScreenWidht() {
-    return MediaQuery.of(Get.context!).size.width;
+  static double getScreenWidht(BuildContext context) {
+    return MediaQuery.of(context).size.width;
   }
 
   static double getPixelRatio() {
