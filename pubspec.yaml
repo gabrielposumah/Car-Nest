@@ -46,6 +46,8 @@ dependencies:
   carousel_slider: ^4.2.1
   readmore: ^3.0.0
   flutter_rating_bar: ^4.0.1
+  firebase_core: ^2.31.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,7 @@ flutter:
     - assets/images/
     - assets/logos/
     - assets/icons/
+    - assets/gift/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

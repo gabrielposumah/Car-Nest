@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,23 +13,26 @@ class UserAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () => Get.to(() => const AddNewAddressScreen()),
-      backgroundColor: Gcolors.primary,
-      child: const Icon(Iconsax.add, color: Gcolors.white)),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => Get.to(() => const AddNewAddressScreen()),
+          backgroundColor: Gcolors.primary,
+          child: const Icon(Iconsax.add, color: Gcolors.white)),
       appBar: GAppBar(
         showBackArrow: true,
-        title: Text('Addresses', style: Theme.of(context).textTheme.headlineSmall),
-
+        title:
+            Text('Addresses', style: Theme.of(context).textTheme.headlineSmall),
       ),
       body: const SingleChildScrollView(
-        child: Padding(padding: EdgeInsets.all(Gsize.defaulSpace),
-        child: Column(
-          children: [
-            GSingleAddress(selectedAddress: true),
-            GSingleAddress(selectedAddress: false)
-          ],
-        ),),
+        child: Padding(
+          padding: EdgeInsets.all(Gsize.defaulSpace),
+          child: Column(
+            children: [
+              GSingleAddress(selectedAddress: true),
+              GSingleAddress(selectedAddress: false)
+            ],
+          ),
+        ),
       ),
     );
   }

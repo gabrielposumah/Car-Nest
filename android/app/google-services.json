@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "374501713742",
+    "project_id": "carnest-2f652",
+    "storage_bucket": "carnest-2f652.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374501713742:android:e706a00346990de0eee01f",
+        "android_client_info": {
+          "package_name": "com.example.product_share_suzuki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374501713742-a4vojg23hito01kbr8ac5nvq0efvd2i9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.product_share_suzuki",
+            "certificate_hash": "da1f69c68307f2ac1c30e7eced4d4a788c087b52"
+          }
+        },
+        {
+          "client_id": "374501713742-ij3dbkhtsr4nh89p5uvho7t4bh8v6ird.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOj7c_zeCwAzvhS16zBWQ4_iIfIIN4snI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374501713742-ij3dbkhtsr4nh89p5uvho7t4bh8v6ird.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "374501713742-eitkis5a8rqefvrcgfahcs00ggkk463e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.productShareSuzuki"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
