@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onBoarding.dart';
+import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onboarding.dart';
 import 'package:product_share_suzuki/utils/theme/theme.dart';
 
 class App extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:product_share_suzuki/features/authentication/controllers.onboarding/onBoarding.controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/controllers.onboarding/onBoarding.controller.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/widgets/onboarding_dot_navigation.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/widgets/onboarding_next_button.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/widgets/onboarding_page.dart';

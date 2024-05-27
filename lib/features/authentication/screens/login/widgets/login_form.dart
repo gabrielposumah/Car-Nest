@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:product_share_suzuki/features/authentication/screens/signup/signup.dart';
 import 'package:product_share_suzuki/route/navigation_menu.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 
@@ -70,13 +71,15 @@ class GLoginForm extends StatelessWidget {
             const SizedBox(height: Gsize.spaceBtwItems),
 
             // Create Account
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: OutlinedButton(onPressed: () {}, child: Text('Sign In')),
-            // ),
-            //   const SizedBox(
-            //   height: Gsize.spaceBtwSections,
-            // )
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                  onPressed: () => Get.to(() => const SignupScreen()),
+                  child: const Text('Create An Account')),
+            ),
+            const SizedBox(
+              height: Gsize.spaceBtwSections,
+            )
           ],
         ),
       ),

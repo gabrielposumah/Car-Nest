@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:product_share_suzuki/features/authentication/controllers.onboarding/onBoarding.controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/controllers.onboarding/onBoarding.controller.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/device/device_utility.dart';
