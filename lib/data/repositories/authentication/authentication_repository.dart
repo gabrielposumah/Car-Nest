@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:product_share_suzuki/data/repositories/user/user_repository.dart';
 import 'package:product_share_suzuki/features/authentication/screens/login/login.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onboarding.dart';
 import 'package:product_share_suzuki/features/authentication/screens/verifyEmail/verify_email.dart';
@@ -18,6 +19,9 @@ class AuthenticationRepository extends GetxController {
   // Variables
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+
+  // Get authenticated user data
+  User? get authUser => _auth.currentUser;
 
   // Called from main.dart on app launch
   @override
@@ -50,6 +54,23 @@ class AuthenticationRepository extends GetxController {
   // ----------------------- Email & Password Sign In ---------------------
 
   // [EmailAuthentication] - signin
+  Future<UserCredential> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
 
   // [EmailAuthenticaiotn] - REGISTER
   Future<UserCredential> registerWithEmailAndPassword(
@@ -87,11 +108,69 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+   // [EmailAuthentication] - Mail Verification
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      return _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
+
   // [LogoutUser] - valid for any authentication
   Future<void> logOut() async {
     try {
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
+
+  // [ReAuthenticate]
+  Future<void> reAuthenticationEmailAndPassword(
+      String email, String password) async {
+    try {
+      // Create a credential
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+
+      // Re Authenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
+
+   // DELETE ACCOUNT
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
     } on FirebaseAuthException catch (e) {
       throw GFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

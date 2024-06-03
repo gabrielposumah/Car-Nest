@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/features/authentication/controllers/singup/signup_controller.dart';
+import 'package:product_share_suzuki/features/authentication/screens/login/login.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
@@ -62,7 +63,7 @@ class GSingupForm extends StatelessWidget {
             TextFormField(
               controller: controller.email,
               validator: (value) => GValidations.validateEmail(value),
-              obscureText: false,  
+              obscureText: false,
               decoration: const InputDecoration(
                   labelText: 'Email', prefixIcon: Icon(Iconsax.direct)),
             ),
@@ -142,6 +143,17 @@ class GSingupForm extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () => controller.signup(),
+                    child: const Text('Create Account'))),
+            const SizedBox(height: Gsize.spaceBtwItems),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()));
+                    },
                     child: const Text('Create Account'))),
           ],
         ));

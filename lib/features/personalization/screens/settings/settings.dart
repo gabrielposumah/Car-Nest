@@ -6,6 +6,7 @@ import 'package:product_share_suzuki/common/widgets/costum_Shapes/container/prim
 import 'package:product_share_suzuki/common/widgets/list_tile/setting_menu_tiles.dart';
 import 'package:product_share_suzuki/common/widgets/list_tile/user_profile_tile.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
+import 'package:product_share_suzuki/data/repositories/authentication/authentication_repository.dart';
 import 'package:product_share_suzuki/features/personalization/screens/address/address.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/profile.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
@@ -92,7 +93,7 @@ class SettingsScreens extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: () {}, child: const Text('Logout')),
+                        onPressed: () => AuthenticationRepository.instance.logOut(), child: const Text('Logout')),
                   ),
                   const SizedBox(height: Gsize.spaceBtwItems * 2.5)
                 ],

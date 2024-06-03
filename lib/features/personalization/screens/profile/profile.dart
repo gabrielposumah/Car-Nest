@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/appbar/appbar.dart';
 import 'package:product_share_suzuki/common/widgets/images/g_circular_image.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
+import 'package:product_share_suzuki/features/personalization/controllers/user_controller.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:product_share_suzuki/utils/change_name/change_name.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -11,6 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: const GAppBar(showBackArrow: true, title: Text('Profile')),
 
@@ -30,7 +34,8 @@ class ProfileScreen extends StatelessWidget {
                         width: 80,
                         height: 80),
                     TextButton(
-                        onPressed: () {}, child: const Text('Change Profile Picture'))
+                        onPressed: () {},
+                        child: const Text('Change Profile Picture'))
                   ],
                 ),
               ),
@@ -46,9 +51,13 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: Gsize.spaceBtwItems),
 
               GProfileMenu(
-                  onPressed: () {}, title: 'Name', value: 'Gabriel Posumah'),
+                  title: 'Name',
+                  value: controller.user.value.fullName,
+                  onPressed: () => Get.to(() => const ChangeName())),
               GProfileMenu(
-                  onPressed: () {}, title: 'Username', value: 'GabrielP'),
+                  onPressed: () {},
+                  title: 'Username',
+                  value: controller.user.value.username),
 
               const SizedBox(height: Gsize.spaceBtwItems),
               const Divider(),
@@ -61,15 +70,17 @@ class ProfileScreen extends StatelessWidget {
 
               GProfileMenu(
                 onPressed: () {},
-                title: 'User ID',
+                title: controller.user.value.id,
                 value: '13476',
                 icon: Iconsax.copy,
               ),
               GProfileMenu(
-                  onPressed: () {}, title: 'Email', value: 'nte@gmail.com'),
+                  onPressed: () {},
+                  title: 'Email',
+                  value: controller.user.value.email),
               GProfileMenu(
                   onPressed: () {},
-                  title: 'Phone Number',
+                  title: controller.user.value.phoneNumber,
                   value: '+62-0182831'),
               GProfileMenu(onPressed: () {}, title: 'Gender', value: 'Male'),
               GProfileMenu(

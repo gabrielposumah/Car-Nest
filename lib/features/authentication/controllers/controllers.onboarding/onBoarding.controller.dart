@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:product_share_suzuki/features/authentication/screens/login/login.dart';
+import 'package:product_share_suzuki/features/authentication/screens/signup/signup.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
