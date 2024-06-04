@@ -90,9 +90,7 @@ class GLoginForm extends StatelessWidget {
                   onPressed: () => Get.to(() => const SignupScreen()),
                   child: const Text('Create An Account')),
             ),
-            const SizedBox(
-              height: Gsize.spaceBtwSections,
-            )
+            
           ],
         ),
       ),

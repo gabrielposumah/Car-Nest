@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_share_suzuki/common/styles/spacing_styles.dart';
 import 'package:product_share_suzuki/common/widgets/login_signup/form_divider.dart';
+import 'package:product_share_suzuki/common/widgets/login_signup/social_buttons.dart';
 import 'package:product_share_suzuki/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:product_share_suzuki/features/authentication/screens/login/widgets/login_header.dart';
 
@@ -24,8 +25,8 @@ class LoginScreen extends StatelessWidget {
           // Divider
           GWidgetsFormDivider(),
 
-          // Footer
-          // GWidgetSocialButtons()
+          //Footer
+          GWidgetSocialButtons()
         ],
       ),
     )));

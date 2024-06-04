@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/appbar/appbar.dart';
 import 'package:product_share_suzuki/common/widgets/images/g_circular_image.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
-import 'package:product_share_suzuki/features/personalization/controllers/user_controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/users/user_controller.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:product_share_suzuki/utils/change_name/change_name.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
 
               GProfileMenu(
                   title: 'Name',
-                  value: controller.user.value.fullName,
+                  value: controller.user.value.firstName,
                   onPressed: () => Get.to(() => const ChangeName())),
               GProfileMenu(
                   onPressed: () {},

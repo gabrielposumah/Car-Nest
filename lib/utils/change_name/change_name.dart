@@ -39,6 +39,7 @@ class ChangeName extends StatelessWidget {
                     expands: false,
                     decoration: const InputDecoration(labelText: 'First Name', prefixIcon: Icon(Iconsax.user)),
                   ),
+                  const SizedBox(height: Gsize.spaceBtwItems),
                     TextFormField(
                     controller: controller.lastName,
                     validator: (value) => GValidations.validateEmptyText('Last Name', value),

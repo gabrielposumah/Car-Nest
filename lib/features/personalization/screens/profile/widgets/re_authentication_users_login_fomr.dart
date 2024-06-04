@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:product_share_suzuki/features/personalization/controllers/user_controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/users/user_controller.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/validators/validators.dart';
 

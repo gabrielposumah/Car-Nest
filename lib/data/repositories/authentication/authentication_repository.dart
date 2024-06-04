@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:product_share_suzuki/data/repositories/user/user_repository.dart';
 import 'package:product_share_suzuki/features/authentication/screens/login/login.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onboarding.dart';
@@ -91,6 +92,37 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  // [Google Authentication] - Goolge
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      // trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+
+      // create new credential
+      final credentials = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken
+      );
+
+      // Once signed in, return user credential
+      return await _auth.signInWithCredential(credentials);
+
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
+
   // [EmailAuthentication] - Mail Verification
   Future<void> sendEmailVerification() async {
     try {
@@ -108,7 +140,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   // [EmailAuthentication] - Mail Verification
+   // [EmailAuthentication] - Forget Password
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       return _auth.sendPasswordResetEmail(email: email);
@@ -128,6 +160,7 @@ class AuthenticationRepository extends GetxController {
   // [LogoutUser] - valid for any authentication
   Future<void> logOut() async {
     try {
+      await   GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
@@ -165,6 +198,7 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong';
     }
   }
+  
 
    // DELETE ACCOUNT
   Future<void> deleteAccount() async {

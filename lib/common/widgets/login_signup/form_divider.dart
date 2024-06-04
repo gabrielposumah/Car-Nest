@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
+import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
 
 class GWidgetsFormDivider extends StatelessWidget {
@@ -31,6 +32,7 @@ class GWidgetsFormDivider extends StatelessWidget {
             endIndent: 60,
           ),
         ),
+        const SizedBox(height: Gsize.spaceBtwSections,)
       ],
     );
   }

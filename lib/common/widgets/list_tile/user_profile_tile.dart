@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/images/g_circular_image.dart';
-import 'package:product_share_suzuki/features/personalization/controllers/user_controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/users/user_controller.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 
 class GUserProfileTile extends StatelessWidget {

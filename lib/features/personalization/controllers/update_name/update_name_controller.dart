@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:product_share_suzuki/data/repositories/user/user_repository.dart';
-import 'package:product_share_suzuki/features/personalization/controllers/user_controller.dart';
+import 'package:product_share_suzuki/features/authentication/controllers/users/user_controller.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/profile.dart';
 import 'package:product_share_suzuki/utils/networks/network_manager.dart';
 import 'package:product_share_suzuki/utils/popups/full_screen_loader.dart';
