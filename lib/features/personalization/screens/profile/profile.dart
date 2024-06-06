@@ -8,6 +8,7 @@ import 'package:product_share_suzuki/features/authentication/controllers/users/u
 import 'package:product_share_suzuki/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:product_share_suzuki/utils/change_name/change_name.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
+import 'package:product_share_suzuki/utils/shimmers/shimmers.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -29,12 +30,24 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const GCircularImage(
-                        image: 'assets/images/foto_profile.png',
-                        width: 80,
-                        height: 80),
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty
+                          ? networkImage
+                          : 'assets/images/foto_profile.png';
+
+                      return controller.imageUploading.value
+                          ? const GShimmerEffect(
+                              width: 80, height: 80, radius: 80)
+                          : GCircularImage(
+                              image: image,
+                              width: 80,
+                              height: 80,
+                              isNetworkImage: networkImage.isNotEmpty,
+                            );
+                    }),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.uploadUserProfilePicture(),
                         child: const Text('Change Profile Picture'))
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:product_share_suzuki/data/repositories/authentication/authentication_repository.dart';
 import 'package:product_share_suzuki/data/repositories/user/user_repository.dart';
 import 'package:product_share_suzuki/features/authentication/models/users/user_model.dart';
@@ -15,9 +16,11 @@ class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   final profileLoading = false.obs;
+
   Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
@@ -30,13 +33,28 @@ class UserController extends GetxController {
   }
 
   // fetch user record
+  // Future<void> fetchUserRecord() async {
+  //   try {
+  //     profileLoading.value = true;
+  //     final user = await userRepository.fetchUserDetails();
+  //     this.user(user);
+  //     profileLoading.value = false;
+  //   } catch (e) {
+  //     user(UserModel.empty());
+  //   } finally {
+  //     profileLoading.value = false;
+  //   }
+  // }
+
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
-      final user = await userRepository.fetchUserDetails();
-      this.user(user);
-      profileLoading.value = false;
+      print('Fetching user record...');
+      final fetchedUser = await userRepository.fetchUserDetails();
+      user(fetchedUser);
+      print('User record fetched successfully: ${fetchedUser.toJson()}');
     } catch (e) {
+      print('Error fetching user record: $e');
       user(UserModel.empty());
     } finally {
       profileLoading.value = false;
@@ -46,26 +64,30 @@ class UserController extends GetxController {
   // Save user record from any registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        // Convert name to first and last name
-        final nameParts =
-            UserModel.nameParts(userCredentials.user!.displayName ?? '');
-        final userName =
-            UserModel.generateUserName(userCredentials.user!.displayName ?? '');
+      // refresh user record
+      await fetchUserRecord();
+      if (user.value.id.isEmpty) {
+        if (userCredentials != null) {
+          // Convert name to first and last name
+          final nameParts =
+              UserModel.nameParts(userCredentials.user!.displayName ?? '');
+          final userName = UserModel.generateUserName(
+              userCredentials.user!.displayName ?? '');
 
-        // Map data
-        final user = UserModel(
-            id: userCredentials.user!.uid,
-            firstName: nameParts[0],
-            lastName:
-                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-            username: userName,
-            email: userCredentials.user!.email ?? '',
-            phoneNumber: userCredentials.user!.phoneNumber ?? '',
-            profilePicture: userCredentials.user!.photoURL ?? '');
+          // Map data
+          final user = UserModel(
+              id: userCredentials.user!.uid,
+              firstName: nameParts[0],
+              lastName:
+                  nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+              username: userName,
+              email: userCredentials.user!.email ?? '',
+              phoneNumber: userCredentials.user!.phoneNumber ?? '',
+              profilePicture: userCredentials.user!.photoURL ?? '');
 
-        // Save user data
-        await userRepository.saveUserRecord(user);
+          // Save user data
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       Gloaders.warningSnackBar(
@@ -128,27 +150,61 @@ class UserController extends GetxController {
   Future<void> reAuthenticationEmailAndPassword() async {
     try {
       GFullScreenLoader.openLoadingDialog(
-        'Processing', 'assets/gift/onBoarding2.gif');
+          'Processing', 'assets/gift/onBoarding2.gif');
 
-    // Check internet
-    final isConnected = await NetworkManager.instance.isConnected();
-    if (!isConnected) {
-      GFullScreenLoader.stopLoading();
-      return;
-    }
+      // Check internet
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        GFullScreenLoader.stopLoading();
+        return;
+      }
 
-    if(!reAuthFormKey.currentState!.validate()) {
+      if (!reAuthFormKey.currentState!.validate()) {
+        GFullScreenLoader.stopLoading();
+        return;
+      }
+
+      await AuthenticationRepository.instance.reAuthenticationEmailAndPassword(
+          verifyEmail.text.trim(), verifyPassword.text.trim());
+      await AuthenticationRepository.instance.deleteAccount();
       GFullScreenLoader.stopLoading();
-      return;
-    } 
-    
-    await AuthenticationRepository.instance.reAuthenticationEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
-    await AuthenticationRepository.instance.deleteAccount();
-    GFullScreenLoader.stopLoading();
-    Get.offAll(() => const LoginScreen());
+      Get.offAll(() => const LoginScreen());
     } catch (e) {
       GFullScreenLoader.stopLoading();
       Gloaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
     }
-  } 
+  }
+
+  // Upload profile image
+  uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+
+        imageUploading.value = true;
+        // Upload image
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Profile/', image);
+
+        // Update user image record
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+        
+        Gloaders.successSnackBar(
+            title: 'Congratulations',
+            message: 'Your Profile Image has been updated');
+      }
+    } catch (e) {
+      Gloaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    } finally {
+      imageUploading.value = true;
+    }
+  }
 }

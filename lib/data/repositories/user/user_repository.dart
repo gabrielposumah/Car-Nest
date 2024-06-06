@@ -1,8 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:product_share_suzuki/data/repositories/authentication/authentication_repository.dart';
 import 'package:product_share_suzuki/features/authentication/models/users/user_model.dart';
+import 'package:product_share_suzuki/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:product_share_suzuki/utils/exceptions/firebase_exceptions.dart';
+import 'package:product_share_suzuki/utils/exceptions/format_exceptions.dart';
 import 'package:product_share_suzuki/utils/exceptions/platform_exceptions.dart';
 
 class UserRepository extends GetxController {
@@ -14,6 +22,7 @@ class UserRepository extends GetxController {
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
+      print('User record saved successfully');
     } on FirebaseException catch (e) {
       throw GFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -26,7 +35,6 @@ class UserRepository extends GetxController {
   }
 
   // Function to fetch user detail based on user ID
-
   Future<UserModel> fetchUserDetails() async {
     try {
       final documentSnapshot = await _db
@@ -86,9 +94,9 @@ class UserRepository extends GetxController {
   }
 
   // Function to remove or delete user data from firestore
-  Future<void> removeUserRecord(String userID) async {
+  Future<void> removeUserRecord(String userId) async {
     try {
-      await _db.collection("Users").doc(userID).delete();
+      await _db.collection("Users").doc(userId).delete();
     } on FirebaseException catch (e) {
       throw GFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -97,6 +105,26 @@ class UserRepository extends GetxController {
       throw GPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please Try Again Later';
+    }
+  }
+
+  //Upload any image
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
     }
   }
 }

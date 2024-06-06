@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -99,17 +101,15 @@ class AuthenticationRepository extends GetxController {
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
 
       // create new credential
       final credentials = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken
-      );
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
       // Once signed in, return user credential
       return await _auth.signInWithCredential(credentials);
-
     } on FirebaseAuthException catch (e) {
       throw GFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -140,7 +140,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   // [EmailAuthentication] - Forget Password
+  // [EmailAuthentication] - Forget Password
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       return _auth.sendPasswordResetEmail(email: email);
@@ -160,7 +160,7 @@ class AuthenticationRepository extends GetxController {
   // [LogoutUser] - valid for any authentication
   Future<void> logOut() async {
     try {
-      await   GoogleSignIn().signOut();
+      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
@@ -198,9 +198,8 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong';
     }
   }
-  
 
-   // DELETE ACCOUNT
+  // DELETE ACCOUNT
   Future<void> deleteAccount() async {
     try {
       await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
@@ -217,4 +216,7 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong';
     }
   }
+
+  // Upload any image
+  
 }

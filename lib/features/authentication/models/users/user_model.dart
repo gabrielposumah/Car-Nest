@@ -59,7 +59,7 @@ class UserModel {
       'Username': username,
       'Email': email,
       'PhoneNumber': phoneNumber,
-      'ProfilePicture': profilePicture
+      'ProfilePicture': profilePicture,
     };
   }
 

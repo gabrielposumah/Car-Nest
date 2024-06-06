@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
+import 'package:product_share_suzuki/utils/shimmers/shimmers.dart';
 
 class GCircularImage extends StatelessWidget {
   const GCircularImage(
@@ -35,13 +37,22 @@ class GCircularImage extends StatelessWidget {
                 : Gcolors.white),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Center(
-        child: Image(
-          fit: fit,
-          image: isNetworkImage
-              ? NetworkImage(image)
-              : AssetImage(image) as ImageProvider,
-          color: overlayColor,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Center(
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: image,
+                  fit: fit,
+                  color: overlayColor,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const GShimmerEffect(width: 55, height: 55, radius: 55,),
+                  errorWidget: (context, url, error) => const Icon(Icons.error))
+              : Image(
+                  fit: fit,
+                  image: AssetImage(image),
+                  color: overlayColor,
+                ),
         ),
       ),
     );

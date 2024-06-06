@@ -41,7 +41,7 @@ class GProductCardVertical extends StatelessWidget {
                 children: [
                   // Thumbnail Image
                   const GRoundedImage(
-                      padding: EdgeInsets.only(top: 50),
+                      // padding: EdgeInsets.only(top: 50),
                       imageUrl: 'assets/images/grand_vitara.png',
                       applyImageRadius: true),
 
