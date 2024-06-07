@@ -11,14 +11,14 @@ class SubCategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GAppBar(title: Text('Passenger'), showBackArrow: true),
+      appBar: const GAppBar(title: Text('Passenger'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(Gsize.defaulSpace),
+          padding: const EdgeInsets.all(Gsize.defaulSpace),
           child: Column(
             children: [
               // Banner
-              GRoundedImage(
+              const GRoundedImage(
                   width: double.infinity,
                   imageUrl: 'assets/images/promo.png',
                   applyImageRadius: true),

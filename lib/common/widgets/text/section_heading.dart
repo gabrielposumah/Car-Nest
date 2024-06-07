@@ -17,6 +17,7 @@ class GSectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title,
             style: Theme.of(context)
@@ -26,7 +27,7 @@ class GSectionHeading extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
         if (showActionButton)
-          TextButton(onPressed: () {}, child: const Text('ButtonTitle'))
+          TextButton(onPressed: onPressed, child: Text(buttonTitle))
       ],
     );
   }

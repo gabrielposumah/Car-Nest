@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
 
               GProfileMenu(
                   title: 'Name',
-                  value: controller.user.value.firstName,
+                  value: controller.user.value.fullName,
                   onPressed: () => Get.to(() => const ChangeName())),
               GProfileMenu(
                   onPressed: () {},

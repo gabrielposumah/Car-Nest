@@ -131,7 +131,7 @@ class UserController extends GetxController {
       if (provider.isNotEmpty) {
         // Re verify auth email
         if (provider == 'google.com') {
-          await auth.loginWithEmailAndPassword;
+          auth.loginWithEmailAndPassword;
           await auth.deleteAccount();
           GFullScreenLoader.stopLoading();
           Get.offAll(() => const LoginScreen());

@@ -33,7 +33,7 @@ class VerifyEmailScreen extends StatelessWidget {
               //     width: GHelperFunctions.screenHeight() * 0.6),
               // const SizedBox(height: Gsize.spaceBtwSections),
               Image(
-                  image: AssetImage('assets/images/success.jpg'),
+                  image: const AssetImage('assets/images/success.jpg'),
                   width: GHelperFunctions.screenHeight() * 0.6),
               const SizedBox(height: Gsize.spaceBtwSections),
               // Title & sub title

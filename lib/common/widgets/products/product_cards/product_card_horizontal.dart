@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/container/rounded_container.dart';
-import 'package:product_share_suzuki/common/widgets/icon/g_circular_icon.dart';
 import 'package:product_share_suzuki/common/widgets/images/g_rounded_image.dart';
 import 'package:product_share_suzuki/common/widgets/text/brand_title_text.dart';
 import 'package:product_share_suzuki/common/widgets/text/product_price_text.dart';
@@ -34,7 +32,7 @@ class GProductCardHorizontal extends StatelessWidget {
             child: const Stack(
               children: [
                 // Thumbnail image
-               const SizedBox(
+               SizedBox(
                   width: 120,
                   height: 120,
                   child: GRoundedImage(
@@ -75,7 +73,7 @@ class GProductCardHorizontal extends StatelessWidget {
             width: 172,
             child:  Column(
               children: [
-              const  Padding(padding: EdgeInsets.only(top: Gsize.md, left: Gsize.sm),
+              Padding(padding: EdgeInsets.only(top: Gsize.md, left: Gsize.sm),
                 child: Column(
                   children: [
                     GProductTitleText(title: 'Grand Vitara MT', smallSize: true),
@@ -84,14 +82,14 @@ class GProductCardHorizontal extends StatelessWidget {
                   ],
                 )),
 
-                const Spacer(),
+                Spacer(),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
 
                     // PRicing
-                   const Padding(padding: EdgeInsets.only(bottom: 10, left: 25), child:  GProductPriceText(price: ' 356.000.000')),
+                   Padding(padding: EdgeInsets.only(bottom: 10, left: 25), child:  GProductPriceText(price: ' 356.000.000')),
 
                     // Add to cart
                     // Container(

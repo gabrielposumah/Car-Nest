@@ -14,7 +14,7 @@ class ForgetPassword extends StatelessWidget {
     final controller = Get.put(ForgotPasswordController());
     return Scaffold(
       appBar: const GAppBar(),
-      body: Padding(padding: EdgeInsets.all(Gsize.defaulSpace),
+      body: Padding(padding: const EdgeInsets.all(Gsize.defaulSpace),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

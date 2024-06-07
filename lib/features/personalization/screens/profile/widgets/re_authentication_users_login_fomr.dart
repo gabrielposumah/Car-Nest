@@ -46,7 +46,7 @@ class ReAuthenticationUsersLoginFomr extends StatelessWidget {
                       )),
                   const SizedBox(height: Gsize.spaceBtwSections),
                   // Login Button
-                  SizedBox(
+                  const SizedBox(
                     width: double.infinity,
                     
                   )
