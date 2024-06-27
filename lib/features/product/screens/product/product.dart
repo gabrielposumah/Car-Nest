@@ -5,6 +5,7 @@ import 'package:product_share_suzuki/common/widgets/appbar/tabbar.dart';
 import 'package:product_share_suzuki/common/widgets/brands/brand_card.dart';
 import 'package:product_share_suzuki/common/widgets/costum_Shapes/container/search_container.dart';
 import 'package:product_share_suzuki/common/widgets/layout/grid_layout.dart';
+import 'package:product_share_suzuki/features/product/controllers/category_controller.dart';
 import 'package:product_share_suzuki/features/product/screens/product/widgets/category_tab.dart';
 import 'package:product_share_suzuki/features/product/screens/product/widgets/section_heading_product.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
@@ -16,8 +17,9 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 7,
+      length: categories.length,
       child: Scaffold(
         appBar: GAppBar(
           title: Text('Product',
@@ -67,28 +69,15 @@ class ProductScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                bottom: const GTabBar(tabs: [
-                  Tab(child: Text('Jimny')),
-                  Tab(child: Text('Grand Vitara')),
-                  Tab(child: Text('Baleno')),
-                  Tab(child: Text('XL7')),
-                  Tab(child: Text('Ertiga')),
-                  Tab(child: Text('Ignis')),
-                  Tab(child: Text('Esspresso')),
-                ]),
+                bottom: GTabBar(
+                    tabs: categories
+                        .map((category) => Tab(child: Text(category.name)))
+                        .toList()),
               ),
             ];
           },
-          body: const TabBarView(
-            children: [
-              GCategoryTab(),
-              GCategoryTab(),
-              GCategoryTab(),
-              GCategoryTab(),
-              GCategoryTab(),
-              GCategoryTab(),
-              GCategoryTab(),
-            ],
+          body:  TabBarView(
+            children: categories.map((category) => GCategoryTab(category: category)).toList(),
           ),
         ),
       ),

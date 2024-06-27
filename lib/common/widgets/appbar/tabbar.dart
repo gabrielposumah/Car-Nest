@@ -24,6 +24,6 @@ class GTabBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
+
   Size get preferredSize => Size.fromHeight(GDeviceUtils.getAppBarHeight());
 }

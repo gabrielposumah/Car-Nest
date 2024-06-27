@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_share_suzuki/common/widgets/images/g_circular_image.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
@@ -10,11 +11,13 @@ class GVerticalImage extends StatelessWidget {
       required this.title,
       this.textColor = Gcolors.white,
       this.backgroundColor = Gcolors.white,
+      this.isNetworkImage = true,
       this.onTap});
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -27,24 +30,34 @@ class GVerticalImage extends StatelessWidget {
         padding: const EdgeInsets.only(right: Gsize.spaceBtwItems),
         child: Column(
           children: [
-            //Circular Icon
-            Container(
-              height: 56,
-              width: 56,
-              padding: const EdgeInsets.all(Gsize.sm),
-              decoration: BoxDecoration(
-                color:
-                    backgroundColor ?? (dark ? Gcolors.black : Gcolors.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  // color: dark ? Gcolors.light : Gcolors.dark
-                ),
-              ),
+            GCircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: Gsize.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: GHelperFunctions.isDarkMode(context)
+                  ? Gcolors.light
+                  : Gcolors.dark,
             ),
+            //Circular Icon
+            // Container(
+            //   height: 56,
+            //   width: 56,
+            //   padding: const EdgeInsets.all(Gsize.sm),
+            //   decoration: BoxDecoration(
+            //     color:
+            //         backgroundColor ?? (dark ? Gcolors.black : Gcolors.white),
+            //     borderRadius: BorderRadius.circular(100),
+            //   ),
+            //   child: Center(
+            //     child: Image(
+            //       image: AssetImage(image),
+            //       fit: BoxFit.cover,
+            //       // color: dark ? Gcolors.light : Gcolors.dark
+            //     ),
+            //   ),
+            // ),
 
             const SizedBox(height: Gsize.spaceBtwItems / 2),
             SizedBox(

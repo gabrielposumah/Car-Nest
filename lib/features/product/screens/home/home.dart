@@ -11,11 +11,14 @@ import 'package:product_share_suzuki/features/product/screens/home/widgets/home_
 import 'package:product_share_suzuki/features/product/screens/home/widgets/promo_slider.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 
+import '../../controllers/product_controller.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -57,17 +60,13 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // Prom Slider
-                  const GPromoSlider(
-                    banners: [
-                      'assets/images/promo.png',
-                      'assets/images/promo.png',
-                      'assets/images/promo.png',
-                    ],
-                  ),
+                  const GPromoSlider(),
                   const SizedBox(height: Gsize.spaceBtwSections),
 
                   // Heading
-                  GSectionHeading(title: 'All Products', onPressed: () => Get.to(() => const AllProducts())),
+                  GSectionHeading(
+                      title: 'All Products',
+                      onPressed: () => Get.to(() => const AllProducts())),
                   const SizedBox(height: Gsize.spaceBtwSections),
 
                   // Popular Products

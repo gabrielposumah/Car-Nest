@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:product_share_suzuki/bindings/general_binding.dart';
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onboarding.dart';
+import 'package:product_share_suzuki/route/app_routes.dart';
 import 'package:product_share_suzuki/utils/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
       theme: TappTheme.lightTheme,
       darkTheme: TappTheme.darkTheme,
       initialBinding: GeneralBinding(),
+      getPages: AppRoutes.pages,
       home: const OnBoardingScreen(),
     );
   }

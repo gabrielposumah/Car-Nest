@@ -7,7 +7,7 @@ import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key, required this.email});
+  const VerifyEmailScreen({super.key,  this.email});
 
   final String? email;
 
