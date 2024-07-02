@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/images/g_circular_image.dart';
 import 'package:product_share_suzuki/features/authentication/controllers/users/user_controller.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
+import 'package:product_share_suzuki/utils/shimmers/shimmers.dart';
 
 class GUserProfileTile extends StatelessWidget {
   const GUserProfileTile({super.key, required this.onPressed});
@@ -13,11 +15,21 @@ class GUserProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-        leading: const GCircularImage(
-          image: 'assets/images/foto_profile.png',
-          width: 50,
-          height: 50,
-          padding: 0,
+        leading:   Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty
+                          ? networkImage
+                          : 'assets/images/foto_profile.png';
+
+                      return controller.imageUploading.value
+                          ? const GShimmerEffect(
+                              width: 80, height: 80, radius: 80)
+                          : GCircularImage(
+                              image: image,
+                              width: 80,
+                              height: 80,
+                              isNetworkImage: networkImage.isNotEmpty,
+                            );}
         ),
         title: Text(controller.user.value.fullName,
             style: Theme.of(context)

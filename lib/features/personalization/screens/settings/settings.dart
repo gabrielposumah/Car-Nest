@@ -8,6 +8,7 @@ import 'package:product_share_suzuki/common/widgets/list_tile/user_profile_tile.
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
 import 'package:product_share_suzuki/data/repositories/authentication/authentication_repository.dart';
 import 'package:product_share_suzuki/features/personalization/screens/address/address.dart';
+import 'package:product_share_suzuki/features/personalization/screens/data/upload_data.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/profile.dart';
 import 'package:product_share_suzuki/utils/constants/colors.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
@@ -77,9 +78,10 @@ class SettingsScreens extends StatelessWidget {
                   const GSectionHeading(
                       title: 'App Settings', showActionButton: false),
                   const SizedBox(height: Gsize.spaceBtwItems),
-                  const GSettingMenuTile(
+                   GSettingMenuTile(
+                    onTap: () => Get.to(() => const GUploadDataScreen()),
                       icon: Iconsax.document_upload,
-                      title: 'Load Data',
+                      title: 'Upload Data',
                       subtitle: 'Upload data to your Cloud Firebase'),
                   GSettingMenuTile(
                     icon: Iconsax.location,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
+import 'package:product_share_suzuki/features/product/models/product_model.dart';
 import 'package:product_share_suzuki/features/product/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:product_share_suzuki/features/product/screens/product_details/widgets/product_attributes.dart';
 import 'package:product_share_suzuki/features/product/screens/product_details/widgets/product_detail_image_slider.dart';
@@ -12,7 +13,9 @@ import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:product_share_suzuki/common/widgets/brands/brand_show_case.dart'
 import 'package:product_share_suzuki/common/widgets/layout/grid_layout.dart';
 import 'package:product_share_suzuki/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:product_share_suzuki/features/product/models/category_model.dart';
+import 'package:product_share_suzuki/features/product/models/product_model.dart';
 import 'package:product_share_suzuki/features/product/screens/product/widgets/section_heading_product.dart';
 import 'package:product_share_suzuki/utils/constants/image_strings.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
@@ -32,7 +33,7 @@ class GCategoryTab extends StatelessWidget {
 
                 GGridLayout(
                     itemCount: 5,
-                    itemBuilder: (_, index) => const GProductCardVertical()),
+                    itemBuilder: (_, index) =>  GProductCardVertical(product: ProductModel.empty())),
                 const SizedBox(height: Gsize.spaceBtwSections),
               ],
             ),

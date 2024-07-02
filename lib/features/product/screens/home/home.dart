@@ -10,6 +10,7 @@ import 'package:product_share_suzuki/features/product/screens/home/widgets/home_
 import 'package:product_share_suzuki/features/product/screens/home/widgets/home_categories.dart';
 import 'package:product_share_suzuki/features/product/screens/home/widgets/promo_slider.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
+import 'package:product_share_suzuki/utils/shimmers/vertical_shimmer_products.dart';
 
 import '../../controllers/product_controller.dart';
 
@@ -70,9 +71,17 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: Gsize.spaceBtwSections),
 
                   // Popular Products
-                  GGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const GProductCardVertical(),
+                  Obx((){
+                    if (controller .isLoading.value) return const GVerticalProductShimmer();
+                    
+                    if(controller.featuredProducts.isEmpty){
+                      return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                    }
+                    return GGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) =>  GProductCardVertical(product: controller.featuredProducts[index],),
+                    );
+                  }
                   )
                 ],
               ),

@@ -1,16 +1,24 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:product_share_suzuki/features/authentication/services/firebase_storage_service.dart';
 import 'package:product_share_suzuki/features/product/models/category_model.dart';
+import 'package:product_share_suzuki/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:product_share_suzuki/utils/exceptions/firebase_exceptions.dart';
 import 'package:product_share_suzuki/utils/exceptions/platform_exceptions.dart';
+
+import '../../../utils/exceptions/format_exceptions.dart';
 
 class CategoryRepository extends GetxController {
   static CategoryRepository get instance => Get.find();
 
   // Variables
-  final _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   // Get all categories
   Future<List<CategoryModel>> getAllCategories() async {
@@ -25,6 +33,10 @@ class CategoryRepository extends GetxController {
     } catch (e) {
       throw 'Something went wrong. Please try again';
     }
+  }
+
+   Future<void> createCategory(CategoryModel category) async {
+    await _db.collection('Categories').add(category.toJson());
   }
 
   // Get sub categories
@@ -59,4 +71,31 @@ class CategoryRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
+  
+
+  Future<String> uploadImage(XFile image) async {
+    try {
+     final ref =FirebaseStorage.instance.ref().child('Categories/Images/Categories/${image.name}');
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseAuthException catch (e) {
+      throw GFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw GFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const GFormatException();
+    } on PlatformException catch (e) {
+      throw GPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
+
+  Future<void> updateCategoryImage(Map<String, dynamic> json) async {
+    await _db.collection('categories').doc('category_id').update(json);
+  }
+
+  
 }

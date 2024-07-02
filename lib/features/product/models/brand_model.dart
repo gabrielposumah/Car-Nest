@@ -40,13 +40,13 @@ class BrandModel {
     );
   }
 
-  // Map Json oriented documetn snapshot from firebase to usermodel
-  factory BrandModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    if(document.data() != null) {
-      final data = document.data()!;
+  // // Map Json oriented documetn snapshot from firebase to usermodel
+  // factory BrandModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  //   if(document.data() != null) {
+  //     final data = document.data()!;
 
-      // Map json record to the model
-      return BrandModel(id: id, name: name, image: image)
-    } 
-  }
+  //     // Map json record to the model
+  //     return BrandModel(id: id, name: name, image: image)
+  //   } 
+  // }
 }

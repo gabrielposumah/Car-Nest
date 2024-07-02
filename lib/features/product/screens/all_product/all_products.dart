@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/appbar/appbar.dart';
 import 'package:product_share_suzuki/common/widgets/layout/grid_layout.dart';
 import 'package:product_share_suzuki/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:product_share_suzuki/features/product/models/product_model.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 
 class AllProducts extends StatelessWidget {
@@ -31,7 +32,7 @@ class AllProducts extends StatelessWidget {
                   const SizedBox(height: Gsize.spaceBtwSections),
 
                   // Product
-                  GGridLayout(itemCount: 4, itemBuilder: (_, index) => const GProductCardVertical())
+                  GGridLayout(itemCount: 4, itemBuilder: (_, index) =>  GProductCardVertical(product: ProductModel.empty(),))
             ],
           ),
         ),

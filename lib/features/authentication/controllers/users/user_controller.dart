@@ -188,7 +188,7 @@ class UserController extends GetxController {
         imageUploading.value = true;
         // Upload image
         final imageUrl =
-            await userRepository.uploadImage('Users/Images/Profile/', image);
+            await userRepository.uploadImage('Categories/Images/Profile/', image);
 
         // Update user image record
         Map<String, dynamic> json = {'ProfilePicture': imageUrl};
