@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:product_share_suzuki/features/leasing/leasing.dart';
 import 'package:product_share_suzuki/features/personalization/screens/settings/settings.dart';
 import 'package:product_share_suzuki/features/product/screens/home/home.dart';
 import 'package:product_share_suzuki/features/product/screens/product/product.dart';
@@ -46,7 +47,7 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     const ProductScreen(),
-    Container(color: Colors.orange),
+    const GLeasingScreen(),
     const SettingsScreens(),
   ];
 }

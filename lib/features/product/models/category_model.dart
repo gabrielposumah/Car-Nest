@@ -47,4 +47,5 @@ class CategoryModel {
       return CategoryModel.empty();
     }
   }
+
 }

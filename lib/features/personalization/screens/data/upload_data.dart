@@ -4,9 +4,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:product_share_suzuki/common/widgets/appbar/appbar.dart';
 import 'package:product_share_suzuki/common/widgets/list_tile/setting_menu_tiles.dart';
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
+import 'package:product_share_suzuki/features/personalization/screens/data/upload/upload_banners.dart';
+import 'package:product_share_suzuki/features/personalization/screens/data/upload/upload_categories.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
-
-import 'upload/upload_categories.dart';
 
 class GUploadDataScreen extends StatelessWidget {
   const GUploadDataScreen({super.key});
@@ -38,12 +38,12 @@ class GUploadDataScreen extends StatelessWidget {
                       icon: Iconsax.category,
                       title: 'Upload Categories',
                       subtitle: '',
-                      onTap: () => Get.to(() =>  CategoryFormScreen())),
+                      onTap: () => Get.to(() =>  CategoryScreen())),
                   GSettingMenuTile(
                       icon: Iconsax.shop,
-                      title: 'Upload Brands',
+                      title: 'Upload Banners',
                       subtitle: '',
-                      onTap: () {}),
+                      onTap: () => Get.to(() =>  GUploadBanners())),
                   GSettingMenuTile(
                       icon: Iconsax.shopping_cart4,
                       title: 'Products',

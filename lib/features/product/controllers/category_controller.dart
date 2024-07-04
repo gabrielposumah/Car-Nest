@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:product_share_suzuki/data/repositories/categories/category_repository.dart';
@@ -12,18 +14,11 @@ class CategoryController extends GetxController {
   final _categoryRepository = Get.put(CategoryRepository());
   RxList<CategoryModel> allCategories= <CategoryModel>[].obs;
   RxList<CategoryModel> featuredCategories = <CategoryModel>[].obs;
-
-  final categoryRepository = Get.put(CategoryRepository());
- 
-  final _imagePicker = ImagePicker();
-  RxString _imageUrl = ''.obs;
-  String get imageUrl => _imageUrl.value;
-
-
+  
   @override
   void onInit() {
-    fetchCategories();
     super.onInit();
+    fetchCategories();
   }
 
   // -- Load category data
@@ -49,71 +44,53 @@ class CategoryController extends GetxController {
     }
   }
 
-  final RxString _name = ''.obs;
-  final RxString _parentId = ''.obs;
-  final RxBool _isFeatured = false.obs;
-  final Rx<XFile?> _imageFile = Rxn<XFile>();
 
-  String get name => _name.value;
-  set name(String value) => _name.value = value;
+// Deklarasi variabel untuk menyimpan data input dari pengguna
+  var categoryNameController = TextEditingController();
+  var categoryParentIdController = TextEditingController();
+  var isCategoryFeatured = false.obs;
 
-  String get parentId => _parentId.value;
-  set parentId(String value) => _parentId.value = value;
+  // Instance Firestore dan Storage
+  // final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // final FirebaseStorage storage = FirebaseStorage.instance;
 
-  bool get isFeatured => _isFeatured.value;
-  set isFeatured(bool value) => _isFeatured.value = value;
+  // Instance Image Picker
+  final ImagePicker _picker = ImagePicker();
+  var pickedImage = Rxn<File>();
 
-  XFile? get imageFile => _imageFile.value;
-  set imageFile(XFile? value) => _imageFile.value = value;
-
- Future<void> uploadCategoriesImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        imageFile = image;
-        final imageUrl = await categoryRepository.uploadImage(image);
-        final category = CategoryModel(
-          id: '',
-          name: name,
-          image: imageUrl,
-          parentId: parentId,
-          isFeatured: isFeatured,
-        );
-        await categoryRepository.createCategory(category);
-      }
-    } catch (e) {
-      // handle errors
+   // Metode untuk memilih gambar
+  Future<void> pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      pickedImage.value = File(pickedFile.path);
+    } else {
+      Get.snackbar('Error', 'No image selected');
     }
   }
 
+  // Metode untuk mengunggah gambar dan menyimpan kategori
+   void saveCategory() async {
+    if (pickedImage.value == null) {
+      Get.snackbar('Error', 'No image selected');
+      return;
+    }
 
-  Future<void> uploadCategories() async {
     try {
-      final image = await _imagePicker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        imageUploading.value = true;
-        final imageUrl = await _categoryRepository.uploadImage(image);
-        _imageUrl.value = imageUrl;
-        // Update user image record
-        Map<String, dynamic> json = {'Categories': imageUrl};
-        await _categoryRepository.updateCategoryImage(json);
-        Get.snackbar('Congratulations', 'Upload Categories Success');
-      }
+      final category = CategoryModel(
+        id: '',
+        name: categoryNameController.text,
+        image: '',
+        parentId: categoryParentIdController.text,
+        isFeatured: isCategoryFeatured.value,
+      );
+
+      await _categoryRepository.addCategory(category, pickedImage.value!);
+
+      Get.snackbar('Success', 'Category saved successfully!');
     } catch (e) {
-      Get.snackbar('Oh Snap!', e.toString());
-    } finally {
-      imageUploading.value = false;
+      Get.snackbar('Error', 'Failed to save category: $e');
     }
   }
-
-// Future<void> pickImage() async {
-//     final ImagePicker _picker = ImagePicker();
-//     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-//     if (image != null) {
-//       _imageFile.value = File(image.path);
-//     }
-//   }
-
   // Load selected category data
 
   // Get category or Sub-Category Products

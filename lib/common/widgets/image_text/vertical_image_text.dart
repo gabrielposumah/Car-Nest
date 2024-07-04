@@ -22,7 +22,8 @@ class GVerticalImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = GHelperFunctions.isDarkMode(context);
+    
+    // final dark = GHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
       onTap: onTap,
@@ -60,18 +61,19 @@ class GVerticalImage extends StatelessWidget {
             // ),
 
             const SizedBox(height: Gsize.spaceBtwItems / 2),
-            SizedBox(
-              width: 55,
-              child: Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: textColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            )
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .apply(color: textColor),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ],
         ),
       ),

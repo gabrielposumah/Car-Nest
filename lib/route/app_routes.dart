@@ -3,6 +3,7 @@ import 'package:product_share_suzuki/features/authentication/screens/login/login
 import 'package:product_share_suzuki/features/authentication/screens/onBoarding/onboarding.dart';
 import 'package:product_share_suzuki/features/authentication/screens/signup/signup.dart';
 import 'package:product_share_suzuki/features/authentication/screens/verifyEmail/verify_email.dart';
+import 'package:product_share_suzuki/features/leasing/leasing.dart';
 import 'package:product_share_suzuki/features/personalization/screens/address/address.dart';
 import 'package:product_share_suzuki/features/personalization/screens/profile/profile.dart';
 import 'package:product_share_suzuki/features/personalization/screens/settings/settings.dart';
@@ -16,7 +17,7 @@ class AppRoutes {
   static final pages = [
     GetPage(name: GRoutes.home, page: () => const HomeScreen()),
     GetPage(name: GRoutes.product, page: () => const ProductScreen()),
-    GetPage(name: GRoutes.leasing, page:() => const HomeScreen()),
+    GetPage(name: GRoutes.leasing, page:() => const GLeasingScreen()),
     GetPage(name: GRoutes.settings, page: () => const SettingsScreens()),
     GetPage(name: GRoutes.productReviews, page: () => const GProductReviews()),
     GetPage(name: GRoutes.allProducts, page: () => const AllProducts()),

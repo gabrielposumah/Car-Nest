@@ -11,7 +11,6 @@ class GHomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryController = Get.put(CategoryController());
-
     return Obx(
       (){
         if(categoryController.isLoading.value) return const GCategoryShimmer();
@@ -20,7 +19,7 @@ class GHomeCategories extends StatelessWidget {
           return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white)));
         }
         return SizedBox(
-        height: 80,
+        height: 100,
         child: ListView.builder(
           itemCount: categoryController.featuredCategories.length,
           scrollDirection: Axis.horizontal,
