@@ -7,6 +7,7 @@ import 'package:product_share_suzuki/app.dart';
 import 'package:product_share_suzuki/data/repositories/authentication/authentication_repository.dart';
 import 'package:product_share_suzuki/firebase_options.dart';
 
+
 Future<void> main() async {
   // Todo : Add widgets binding
   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

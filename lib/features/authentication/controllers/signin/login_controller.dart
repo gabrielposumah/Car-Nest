@@ -8,7 +8,6 @@ import 'package:product_share_suzuki/utils/popups/full_screen_loader.dart';
 import 'package:product_share_suzuki/utils/popups/loader.dart';
 
 class LoginController extends GetxController {
-
   // Variables
   final rememberMe = false.obs;
   final hidePassword = true.obs;
@@ -30,40 +29,40 @@ class LoginController extends GetxController {
   Future<void> emailAndPasswordSignIn() async {
     try {
       // start loading
-      GFullScreenLoader.openLoadingDialog('Logging you in...', 'assets/gift/onBoarding2/gif');
+      GFullScreenLoader.openLoadingDialog(
+          'Logging you in...', 'assets/gift/loading.json');
 
       // Check the internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
-      if(!isConnected){
+      if (!isConnected) {
         GFullScreenLoader.stopLoading();
         return;
       }
 
       // Form validation
-      if(!loginFormKey.currentState!.validate()) {
+      if (!loginFormKey.currentState!.validate()) {
         GFullScreenLoader.stopLoading();
         return;
       }
 
       // Save data if remember me is selected
-      if(rememberMe.value) {
+      if (rememberMe.value) {
         localStorage.write('REMEMBER_ME_EMAIL', email.text.trim());
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
       // Login user using email and paswsword authentication
-      final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
-
+      final userCredentials = await AuthenticationRepository.instance
+          .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // remove loader
       GFullScreenLoader.stopLoading();
 
       // Redirect
       AuthenticationRepository.instance.screenRedirect();
-    } catch(e) {
+    } catch (e) {
       GFullScreenLoader.stopLoading();
       Gloaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
-
     }
   }
 
@@ -71,17 +70,19 @@ class LoginController extends GetxController {
   Future<void> googleSignIn() async {
     try {
       // start loading
-      GFullScreenLoader.openLoadingDialog('Logging you in', 'assets/gift/onBoarding2.gif');
+      GFullScreenLoader.openLoadingDialog(
+          'Logging you in', 'assets/gift/loading.json');
 
       // check internet connectivity
       final isConnected = await NetworkManager.instance.isConnected();
-      if(!isConnected){
+      if (!isConnected) {
         GFullScreenLoader.stopLoading();
         return;
       }
 
       // Login user using google authentication
-      final userCredentials =  await AuthenticationRepository.instance.signInWithGoogle();
+      final userCredentials =
+          await AuthenticationRepository.instance.signInWithGoogle();
 
       // Save user record
       await userController.saveUserRecord(userCredentials);
@@ -89,10 +90,9 @@ class LoginController extends GetxController {
       // remove loader
       GFullScreenLoader.stopLoading();
 
-      // Redirect 
+      // Redirect
       AuthenticationRepository.instance.screenRedirect();
-
-    } catch(e) {
+    } catch (e) {
       Gloaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }

@@ -22,13 +22,13 @@ class OnBoardingScreen extends StatelessWidget {
             onPageChanged: controller.updatePageIndicator,
             children: const [
               OnBoardingPage(
-                image: 'assets/gift/onBoarding1.gif',
+                image: 'assets/gift/onBoarding1.json',
                 title: 'Choose Your Product',
                 subTitle:
                     "Discover a wide range of cars from trusted dealers. Let's find your dream car!",
               ),
               OnBoardingPage(
-                image: 'assets/gift/onBoarding2.gif',
+                image: 'assets/gift/onBoarding2.json',
                 title: 'Easy Search',
                 subTitle:
                     "Search and compare! Use filters to find and compare models, read reviews, and see photos. Simplify your car search",

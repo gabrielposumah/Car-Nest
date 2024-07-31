@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 import 'package:product_share_suzuki/utils/helpers/helper_functions.dart';
 
@@ -17,11 +18,16 @@ class OnBoardingPage extends StatelessWidget {
       padding: const EdgeInsets.all(Gsize.defaulSpace),
       child: Column(
         children: [
-          Image(
+          Lottie.asset(
+            image,
             width: GHelperFunctions.screenWidth() * 0.9,
             height: GHelperFunctions.screenHeight() * 0.6,
-            image: AssetImage(image),
           ),
+          // Image(
+          //   width: GHelperFunctions.screenWidth() * 0.9,
+          //   height: GHelperFunctions.screenHeight() * 0.6,
+          //   image: AssetImage(image),
+          // ),
           Text(title,
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center),

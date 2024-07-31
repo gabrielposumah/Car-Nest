@@ -51,37 +51,37 @@ class GDummyData {
   ];
 
   // List of all products
-  static final List<ProductModel> products = [
-    ProductModel(id: '001', stock: 15, price: 135, title: 'Grand Vitara', thumbnail: 'assets/images/xl7.png',
-    salePrice: 120, brand: BrandModel(id: '1', image: 'assets/images/suzuki.png',name: 'Suzuki',isFeatured: true, productsCount: 10), categoryId: '1', description: 'Grand Vitara AT', sku: 'GT45656',
-    images: ['assets/images/xl7.png', 'assets/images/xl7.png', 'assets/images/xl7.png', 'assets/images/xl7.png'], 
-    productAttributes: [
-      ProductAttributeModel(name: 'Color', values : ['Green', 'Black', 'Red']),
-      ProductAttributeModel(name: 'Size', values: ['Small', 'Medium', 'Large']),
-    ],
-    productVariations: [
-      ProductVariationModel(id: '1',
-      stock: 34,
-      price: 134,
-      salePrice: 122,
-      image: 'assets/images/xl7.png',
-      description: 'This is a car passengers',
-       attributeValues: {'Color': 'Green', 'Type' : 'AT'}),
-      ProductVariationModel(id: '2', 
-      stock: 24,
-      price: 134,
-      salePrice: 122,
-      image: 'assets/images/xl7.png',
-      description: 'This is a car passengers',
-      attributeValues: {'Color': 'Red', 'Type' : 'AT'}),
-      ProductVariationModel(id: '3',
-      stock: 24,
-      price: 134,
-      salePrice: 122,
-      image: 'assets/images/xl7.png',
-      description: 'This is a car passengers',
-      attributeValues: {'Color': 'Black', 'Type' : 'AT'}),
+  // static final List<ProductModel> products = [
+  //   ProductModel(id: '001', stock: 15, price: 135, title: 'Grand Vitara', thumbnail: 'assets/images/xl7.png',
+  //   salePrice: 120, brand: BrandModel(id: '1', image: 'assets/images/suzuki.png',name: 'Suzuki',isFeatured: true, productsCount: 10), categoryId: '1', description: 'Grand Vitara AT', sku: 'GT45656',
+  //   images: ['assets/images/xl7.png', 'assets/images/xl7.png', 'assets/images/xl7.png', 'assets/images/xl7.png'], 
+  //   productAttributes: [
+  //     ProductAttributeModel(name: 'Color', values : ['Green', 'Black', 'Red']),
+  //     ProductAttributeModel(name: 'Size', values: ['Small', 'Medium', 'Large']),
+  //   ],
+  //   productVariations: [
+  //     ProductVariationModel(id: '1',
+  //     stock: 34,
+  //     price: 134,
+  //     salePrice: 122,
+  //     image: 'assets/images/xl7.png',
+  //     description: 'This is a car passengers',
+  //      attributeValues: {'Color': 'Green', 'Type' : 'AT'}),
+  //     ProductVariationModel(id: '2', 
+  //     stock: 24,
+  //     price: 134,
+  //     salePrice: 122,
+  //     image: 'assets/images/xl7.png',
+  //     description: 'This is a car passengers',
+  //     attributeValues: {'Color': 'Red', 'Type' : 'AT'}),
+  //     ProductVariationModel(id: '3',
+  //     stock: 24,
+  //     price: 134,
+  //     salePrice: 122,
+  //     image: 'assets/images/xl7.png',
+  //     description: 'This is a car passengers',
+  //     attributeValues: {'Color': 'Black', 'Type' : 'AT'}),
     
-    ], productType : 'ProductType.value'),
-  ];
+  //   ], productType : 'ProductType.value'),
+  // ];
 }

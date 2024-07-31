@@ -216,5 +216,4 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Upload any image
-  
 }

@@ -120,8 +120,8 @@ class GProductCardVertical extends StatelessWidget {
                         ),
                       Padding(
                         padding: const EdgeInsets.only(left: Gsize.sm),
-                        child: GProductPriceText(
-                            price: controller.getProductPrice(product)),
+                        child:
+                            GProductPriceText(price: product.price.toString()),
                       ),
                     ],
                   ),

@@ -6,6 +6,7 @@ import 'package:product_share_suzuki/common/widgets/list_tile/setting_menu_tiles
 import 'package:product_share_suzuki/common/widgets/text/section_heading.dart';
 import 'package:product_share_suzuki/features/personalization/screens/data/upload/upload_banners.dart';
 import 'package:product_share_suzuki/features/personalization/screens/data/upload/upload_categories.dart';
+import 'package:product_share_suzuki/features/personalization/screens/data/upload/upload_products.dart';
 import 'package:product_share_suzuki/utils/constants/size.dart';
 
 class GUploadDataScreen extends StatelessWidget {
@@ -48,7 +49,7 @@ class GUploadDataScreen extends StatelessWidget {
                       icon: Iconsax.shopping_cart4,
                       title: 'Products',
                       subtitle: '',
-                      onTap: () {}),
+                      onTap: () => Get.to(() => UploadProducts())),
                   GSettingMenuTile(
                       icon: Iconsax.image,
                       title: 'Brands',

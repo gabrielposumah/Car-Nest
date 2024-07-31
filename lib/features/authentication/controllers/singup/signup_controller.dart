@@ -26,7 +26,7 @@ class SignupController extends GetxController {
   void signup() async {
     try {
       // Start loading
-      GFullScreenLoader.openLoadingDialog('We are processing your information', 'https://lottie.host/f523c28e-ab0c-45c8-97b9-ef8ae667bba7/gE0unhlt82.json');
+      GFullScreenLoader.openLoadingDialog('We are processing your information', 'assets/gift/loading.json');
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();

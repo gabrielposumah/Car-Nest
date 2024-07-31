@@ -71,18 +71,23 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: Gsize.spaceBtwSections),
 
                   // Popular Products
-                  Obx((){
-                    if (controller .isLoading.value) return const GVerticalProductShimmer();
-                    
-                    if(controller.featuredProducts.isEmpty){
-                      return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const GVerticalProductShimmer();
+                    }
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                          child: Text('No Data Found!',
+                              style: Theme.of(context).textTheme.bodyMedium));
                     }
                     return GGridLayout(
                       itemCount: controller.featuredProducts.length,
-                      itemBuilder: (_, index) =>  GProductCardVertical(product: controller.featuredProducts[index],),
+                      itemBuilder: (_, index) => GProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
                     );
-                  }
-                  )
+                  })
                 ],
               ),
             )
